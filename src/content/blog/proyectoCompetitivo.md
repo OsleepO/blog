@@ -78,22 +78,15 @@ funciona correctamente con el método main
 ## Codigos
 
 ```java
-package prueba;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-public class pruebaProyecto {
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		double[] etapas = {74.12, 63.89, 67.37, 84.03};
 		ArrayList<String[]> equipos = new ArrayList<>();
 		ArrayList<double[]> tiempos = new ArrayList<>();
 		rellenarDatos(equipos, tiempos, sc);
-		for (int i = 0; i < 3; i++) {
-        	System.out.println("El equipo " + equipos.get(calcularClasificacion(equipos, tiempos)[i])[0] + " está en la posición " + (i + 1));
+		for (int i = 0; i < equipos.size(); i++) {
+        	System.out.println("El equipo " + equipos.get(calcularClasificacion(equipos, tiempos)[i])[0] + " está en la posición " + (i + 1)
+        			+" con una velocidad media de "+velocidadMediaEquipos(tiempos, etapas)[i]+"km/h");
         }
 		calcularClasificacion(equipos, tiempos);
 		
@@ -101,47 +94,25 @@ public class pruebaProyecto {
 		for(int i = 0; i < corredorRapido.length; i++) {
 			System.out.println("Etapa "+(i + 1)+":\n"
 					+ "Corredor más rápido: "+equipos.get(corredorRapido[i])[i % 2 + 1]
-					+ "\nTiempo del corredor más rápido: "+tiempos.get(corredorRapido[i])[i]
+					+ "\nTiempo del corredor más rápido: "+tiempos.get(corredorRapido[i])[i]+" horas"
 					+ "\nVelocidad media del corredor mas rapido: "+Math.round(velocidadKmh(etapas[i], tiempos.get(corredorRapido[i])[i]) * 100.0) / 100.0+"km/h");
 		}
-		
-		
 		sc.close();
-		
 	}
 	
 	public static void rellenarDatos(ArrayList<String[]> equipos, ArrayList<double[]> tiempos, Scanner sc) {
-		
-//		equipos.add(new String[]{"Luisa Speedsters", "Carlos Perez", "Anna"});
-//	    tiempos.add(new double[]{6.20, 5.10, 4.90, 7.00});
-//
-//	    equipos.add(new String[]{"Juan Sprinters", "Elena Rodriguez", "Carlos"});
-//	    tiempos.add(new double[]{5.80, 4.70, 4.60, 6.50});
-//	    
-//	    equipos.add(new String[]{"Laura Racers", "David Gomez", "Emma"});
-//	    tiempos.add(new double[]{5.90, 4.60, 4.70, 6.70});
-//
-//	    equipos.add(new String[]{"Roberto Blazers", "Sara Gonzalez", "Michael"});
-//	    tiempos.add(new double[]{5.70, 4.40, 4.80, 6.90});
-//	    
-//	    equipos.add(new String[]{"Diego Sprinters", "Olivia Smith", "Lucas"});
-//	    tiempos.add(new double[]{6.00, 4.50, 4.60, 6.80});	
-//
-//	    equipos.add(new String[]{"Maria Rushers", "Juan Martinez", "Sophia"});
-//	    tiempos.add(new double[]{5.60, 4.80, 4.90, 6.60});
-//
-//	    equipos.add(new String[]{"Daniel Racers", "Paula Ruiz", "Liam"});
-//	    tiempos.add(new double[]{5.50, 4.90, 4.60, 6.40});
-//
-//	    equipos.add(new String[]{"Natalia Blazers", "Hector Sanchez", "Isabella"});
-//	    tiempos.add(new double[]{5.80, 4.70, 4.70, 6.30});
-//
-//	    equipos.add(new String[]{"Pablo Speedsters", "Eva Hernandez", "Noah"});
-//	    tiempos.add(new double[]{6.10, 5.00, 4.80, 6.20});
-        
-
+		Boolean comprobar = true;
+		int numeroEquipos = 0;
         System.out.println("Introduce numero de equipos");
-        int numeroEquipos = sc.nextInt() ;
+        while(comprobar) {
+        	if(sc.hasNextInt()) {
+        		numeroEquipos = sc.nextInt();
+        		comprobar = false;
+        	} else {
+        		System.out.println("El valor introducido no es correcto. Intentalo de nuevo");
+        		sc.next();
+        	}
+        }
         sc.nextLine();
         for (int i = 0; i < numeroEquipos ; i++) {
         	String[] equipo = new String[3]; 
@@ -190,30 +161,33 @@ public class pruebaProyecto {
             for (int j = 0; j < mediaEquipos.length; j++) {
                 if (mediaOrdenadas[i] == mediaEquipos[j]) {
                     clasificacion[i] = j;
-
                 }
             }
         }
-        
-       /* Collections.sort(equipos, new Comparator<Equipos>() {
-            @Override
-            public int compare(Equipos e1, Equipos e2) {
-                return Double.compare(e2.calcularVelocidadMedia(), e1.calcularVelocidadMedia());*/
         return clasificacion;
 
         //bucle for para comparar cada posicion del array ordenado con el desordenado para sacar la posicion del valor exacto
         //comparar la posicion del array ordenado con la posicion del array sin ordenar para poder sacarlo
-
-
-
     }
 	
 	private static double velocidadKmh(double km, double h) {
 		return km / h;
 	}
 	
+	public static double[] velocidadMediaEquipos(ArrayList<double[]>tiempos, double[]etapas) {
+		double[] velocidadE = new double[tiempos.size()];
+		int index = 0;
+		double sumaEtapas = Arrays.stream(etapas).sum();
+		for (double[] tiempoEquipos : tiempos) {
+			velocidadE[index] = Math.round((velocidadKmh(sumaEtapas, Arrays.stream(tiempoEquipos).sum())) * 100.0) / 100.0;
+			
+			index++;
+		}
+		return velocidadE;
+	}
+	
 	public static int[] calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<String[]> equipos, ArrayList<double[]> tiempos) {
-	    int[] almacen = new int[etapas.length];
+	    int[] corredorRapido = new int[etapas.length];
 	    
 	    for(int i = 0; i < etapas.length; i++) {
 	        double tiempoMasRapido = tiempos.get(0)[i];
@@ -221,13 +195,11 @@ public class pruebaProyecto {
 	        for(double[] t : tiempos) {
 	        	if(t[i] < tiempoMasRapido) {
 	                tiempoMasRapido = t[i];
-	                almacen[i] = index;
+	                corredorRapido[i] = index;
 	            }
 	            index++;
 	        }
 	    }
-	    
-	    return almacen; 
+	    return corredorRapido; 
 	}
-}
 ```
