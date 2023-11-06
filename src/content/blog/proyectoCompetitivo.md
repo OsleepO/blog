@@ -57,20 +57,20 @@ método main . Este desarrollador también será responsable de coordinar el tra
 de los demás desarrolladores, ya que estos componentes del código interactúan
 directamente con todas las demás partes.
 
-2. **Desarrollador** 2: Puede trabajar en los métodos rellenarDatos y tiempoMedia .
+2. **Desarrollador** 2: Puede trabajar en los métodos rellenarDatos y calcularMediaTiempo.
 Estos métodos se encargan de inicializar los datos de la carrera y calcular los
 tiempos medios, respectivamente.
 
-3. **Desarrollador** 3: Puede trabajar en los métodos clasificacion y velocidadKmh .
-El método clasificacion requiere que el método tiempoMedia esté completo,
+3. **Desarrollador** 3: Puede trabajar en los métodos clasificacion.
+El método clasificacion requiere que el método calcularMediaTiempo esté completo,
 por lo que este desarrollador necesitará trabajar en estrecha colaboración con el
 Desarrollador 2.
 
-4. **Desarrollador** 4: Puede trabajar en el método velocidadMedia . Este método
-depende del método velocidadKmh , por lo que este desarrollador necesitará
-trabajar en estrecha colaboración con el Desarrollador 3.
+4. **Desarrollador** 4: Puede trabajar en el método velocidadKmh y velocidadMediaEquipos. Este método
+depende del método velocidadKmh y por lo tanto necesitara terminar primero con el método
+velocidadKmh.
 
-5. **Desarrollador** 5: Puede trabajar en el método corredorMasRapidoPorEtapa . Este
+5. **Desarrollador** 5: Puede trabajar en el método corredorMasRapidoPorEtapa. Este
 método es bastante independiente de los demás, pero este desarrollador
 necesitará comunicarse con el Desarrollador 1 para asegurarse de que su código
 funciona correctamente con el método main 
