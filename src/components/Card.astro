@@ -1,61 +1,34 @@
 ---
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+  title: string;
+  description: string;
+  slug: string;
+  date: Date;
+  tags: String[];
 }
-
-const { href, title, body } = Astro.props;
+const { title, description, slug, date, tags } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
-<style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
-	}
-</style>
+<article
+  class="w-full h-48 border dark:bg-dark-main-900/30 bg-light-main-100/30 dark:border-white border-gray-200 rounded flex flex-col shadow p-2 transition-all hover:-translate-y-2"
+>
+  <a href={`/blog/${slug}`} class="w-full h-full flex flex-col justify-between">
+    <div>
+      <h2 class="text-2xl font-bold dark:text-dark-title-100 line-clamp-1">
+        {title}
+      </h2>
+      <p class="mt-2 line-clamp-4">{description}</p>
+    </div>
+    <div
+      class="dark:text-white text-dark-main italic text-sm flex gap-2 line-clamp-1"
+    >
+      <time>
+        {date.toLocaleDateString()}
+      </time>
+       •
+      <ul class="flex gap-2">
+        {tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </div>
+  </a>
+</article>
