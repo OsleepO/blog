@@ -79,24 +79,37 @@ funciona correctamente con el método main
 
 ```java
     public static void main(String[] args) {
+        // Crear un objeto Scanner para leer la entrada del usuario
 		Scanner sc = new Scanner(System.in);
+
+        // Definir las distancias de las etapas de la carrera
 		double[] etapas = {74.12, 63.89, 67.37, 84.03};
+
+        // Crear listas para almacenar los datos de los equipos y sus tiempos
 		ArrayList<String[]> equipos = new ArrayList<>();
 		ArrayList<double[]> tiempos = new ArrayList<>();
+
+        // Llenar las listas con los datos de entrada del usuario
 		rellenarDatos(equipos, tiempos, sc);
-		for (int i = 0; i < equipos.size(); i++) {
+
+        // Los 3 primeros, para cada equipo, imprimir su posición, su nombre y su velocidad media
+		for (int i = 0; i < 3; i++) {
         	System.out.println("El equipo " + equipos.get(calcularClasificacion(equipos, tiempos)[i])[0] + " está en la posición " + (i + 1)
         			+" con una velocidad media de "+velocidadMediaEquipos(tiempos, etapas)[calcularClasificacion(equipos, tiempos)[i]]+"km/h");
         }
-		calcularClasificacion(equipos, tiempos);
-		
+
+        // Calcular el corredor más rápido para cada etapa
 		int[] corredorRapido = calcularCorredorMasRapidoEtapa(etapas, equipos, tiempos);
+
+        // Para cada etapa, imprimir el número de etapa, el nombre del corredor más rápido, su tiempo y su velocidad media
 		for(int i = 0; i < corredorRapido.length; i++) {
 			System.out.println("Etapa "+(i + 1)+":\n"
 					+ "Corredor más rápido: "+equipos.get(corredorRapido[i])[i % 2 + 1]
 					+ "\nTiempo del corredor más rápido: "+tiempos.get(corredorRapido[i])[i]+" horas"
 					+ "\nVelocidad media del corredor mas rapido: "+Math.round(velocidadKmh(etapas[i], tiempos.get(corredorRapido[i])[i]) * 100.0) / 100.0+"km/h");
 		}
+
+        // Cerrar el objeto Scanner
 		sc.close();
 	}
 	
