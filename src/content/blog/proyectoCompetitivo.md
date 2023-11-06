@@ -78,7 +78,7 @@ funciona correctamente con el método main
 ## Codigos
 
 ```java
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		double[] etapas = {74.12, 63.89, 67.37, 84.03};
 		ArrayList<String[]> equipos = new ArrayList<>();
@@ -86,7 +86,7 @@ funciona correctamente con el método main
 		rellenarDatos(equipos, tiempos, sc);
 		for (int i = 0; i < equipos.size(); i++) {
         	System.out.println("El equipo " + equipos.get(calcularClasificacion(equipos, tiempos)[i])[0] + " está en la posición " + (i + 1)
-        			+" con una velocidad media de "+velocidadMediaEquipos(tiempos, etapas)[i]+"km/h");
+        			+" con una velocidad media de "+velocidadMediaEquipos(tiempos, etapas)[calcularClasificacion(equipos, tiempos)[i]]+"km/h");
         }
 		calcularClasificacion(equipos, tiempos);
 		
@@ -127,9 +127,18 @@ funciona correctamente con el método main
             equipos.add(equipo);
 
         for (int j = 0; j < tiempoEquipos.length; j++) {
+        	comprobar = true;
                 System.out.println("Tiempo de etapa "+ (j+1) + " del equipo " + (i+1)+":");
-                tiempoEquipos[j] = sc.nextDouble();
-                sc.nextLine();
+                while(comprobar) {
+                	if(sc.hasNextDouble()) {
+                		tiempoEquipos[j] = sc.nextDouble();
+                		comprobar = false;
+                		sc.nextLine();
+                	} else {
+                		System.out.println("El valor introducido no es correcto. Intentalo de nuevo");
+                		sc.next();
+                	}
+                }
             }
             tiempos.add(tiempoEquipos);
 
