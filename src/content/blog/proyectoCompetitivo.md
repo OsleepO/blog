@@ -38,13 +38,13 @@ Ahora para guardar el tiempo de cada equipo en una etapa, utilizaremos el tercer
 
 ```java
 // ArrayList donde se guardan todos los tiempos de cada etapa de los equipos
-ArrayList<double[]> tiemposEtapa;
+ArrayList<double[]> tiempos;
 
 // Array donde se guarda cada el tiempo de cada equipo
-double[] tiempoEtapa = new double[4];
+double[] tiempo = {tiempo1, tiempo2, tiempo3, tiempo4};
 
 // Guardamos el tiempo en el array
-tiemposEtapa.add(tiempoEtapa);
+tiempos.add(tiempo);
 
 ```
 
