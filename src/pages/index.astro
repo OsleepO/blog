@@ -8,7 +8,7 @@ const allBlogPosts = await getCollection("blog");
 
 <Layout title="Blog">
 	<main>
-		<h1 class="font-extrabold text-6xl p-6 text-center">BLOG</h1>
+		<h1 class="font-extrabold text-6xl p-6 text-center">BLOGS</h1>
 		<div class="lg:w-[800px] flex flex-col gap-4 w-full p-4">
 			{allBlogPosts.map(({ data, slug }) => <Card slug={slug} {...data} />)}
 		</div>
