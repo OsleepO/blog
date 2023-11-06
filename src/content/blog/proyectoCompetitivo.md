@@ -78,7 +78,15 @@ funciona correctamente con el método main
 ## Codigos
 
 ```java
-    public static void main(String[] args) {
+package ciclismo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class carrera {
+
+	public static void main(String[] args) {
         // Crear un objeto Scanner para leer la entrada del usuario
 		Scanner sc = new Scanner(System.in);
 
@@ -89,11 +97,19 @@ funciona correctamente con el método main
 		ArrayList<String[]> equipos = new ArrayList<>();
 		ArrayList<double[]> tiempos = new ArrayList<>();
 
+		System.out.println( // Explica el programa a modo de guía para el usuario.
+                		"Bienvenido usuario, este programa analizará los equipos que introduzcas, devolviendo: \r\n"
+                        + "-Cuáles son los tres equipos clasificados como primeros globalmente, \r\n"
+                        + " mostrando su puesto ,nombre y su velocidad media en la carrera.\r\n"
+                        + "-El corredor más rapido de la 1ª, 2ª, 3ª y 4ª etapa y su velocidad media.\r\n");
         // Llenar las listas con los datos de entrada del usuario
 		rellenarDatos(equipos, tiempos, sc);
-
+		
+		// Usamos un operador ternario para en caso de que tenga menos de 3 equipos funciona bien el programa
+		// mas info: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+		int condicion = calcularClasificacion(equipos, tiempos).length < 3 ? calcularClasificacion(equipos, tiempos).length : 3;
         // Los 3 primeros, para cada equipo, imprimir su posición, su nombre y su velocidad media
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < condicion; i++) {
         	System.out.println("El equipo " + equipos.get(calcularClasificacion(equipos, tiempos)[i])[0] + " está en la posición " + (i + 1)
         			+" con una velocidad media de "+velocidadMediaEquipos(tiempos, etapas)[calcularClasificacion(equipos, tiempos)[i]]+"km/h");
         }
@@ -116,7 +132,7 @@ funciona correctamente con el método main
 	public static void rellenarDatos(ArrayList<String[]> equipos, ArrayList<double[]> tiempos, Scanner sc) {
 		Boolean comprobar = true;
 		int numeroEquipos = 0;
-        System.out.println("Introduce numero de equipos");
+        System.out.println("Introduce numero de equipos: ");
         while(comprobar) {
         	if(sc.hasNextInt()) {
         		numeroEquipos = sc.nextInt();
@@ -192,7 +208,7 @@ funciona correctamente con el método main
         //comparar la posicion del array ordenado con la posicion del array sin ordenar para poder sacarlo
     }
 	
-	private static double velocidadKmh(double km, double h) {
+	public static double velocidadKmh(double km, double h) {
 		return km / h;
 	}
 	
@@ -218,21 +234,37 @@ funciona correctamente con el método main
 		return velocidadE;
 	}
 	
-	
+	//Método para almacenar en un array los corredores más rapidos de cada etapa
 	public static int[] calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
+		
+		// Array para almacenar el indice del corredor más rapido de cada etapa.
 	    int[] corredorRapido = new int[etapas.length];
 	    
+	    //for que recorre las etapas.
 	    for(int i = 0; i < etapas.length; i++) {
+	    	
+	    	//Variable que guarda el primer tiempo del correodor para empezar y despues establecer el corredor más rapido de cada etapa.
 	        double tiempoMasRapido = tiempos.get(0)[i];
+	        
+	        //Indice para llevar un seguimiento del índice del corredor más rapido del equipo
 	        int index = 0;
+	        
+	        //forEach para comparar el tiempo mas rapido del corredor con todos los tiempos de los equipos
 	        for(double[] t : tiempos) {
+	        	
+	        	 // Si el tiempo actual es menor que tiempoMasRapido se actualiza el corredor más rapido con el indice actual
 	        	if(t[i] < tiempoMasRapido) {
 	                tiempoMasRapido = t[i];
 	                corredorRapido[i] = index;
 	            }
+	        	
+	        	// se incrementa el indice para pasar al siguiente corredor
 	            index++;
 	        }
 	    }
+	    
+	    // Devuelve el array con el indice de todos los corredores más rapidos de cada etapa
 	    return corredorRapido; 
 	}
+}
 ```
