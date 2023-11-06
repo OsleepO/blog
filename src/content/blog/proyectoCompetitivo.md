@@ -99,7 +99,7 @@ funciona correctamente con el método main
         }
 
         // Calcular el corredor más rápido para cada etapa
-		int[] corredorRapido = calcularCorredorMasRapidoEtapa(etapas, equipos, tiempos);
+		int[] corredorRapido = calcularCorredorMasRapidoEtapa(etapas, tiempos);
 
         // Para cada etapa, imprimir el número de etapa, el nombre del corredor más rápido, su tiempo y su velocidad media
 		for(int i = 0; i < corredorRapido.length; i++) {
@@ -196,19 +196,30 @@ funciona correctamente con el método main
 		return km / h;
 	}
 	
+	//Este método lo que hace es calcular la velocidad media de cada equipo
 	public static double[] velocidadMediaEquipos(ArrayList<double[]>tiempos, double[]etapas) {
 		double[] velocidadE = new double[tiempos.size()];
 		int index = 0;
+
+		//Este double es para que se sumen todas las etapas con Arrays.stream().sum() y las ponga en una variable que la hemos llamado sumaEtapas
 		double sumaEtapas = Arrays.stream(etapas).sum();
+
+		// Este forEach es para recorrer todo el ArrayList y poder calcular la velocidad media de cada uno de los equipos
 		for (double[] tiempoEquipos : tiempos) {
+
+			// velocidadE guardamos dentro del array es la velocidad media de cada equipo, 
+			// lo igualamos a la función Math. round() que retorna el valor de un número redondeado con 2 decimales multiplicando por 100.0 y dividiendo por 100.0  y dentro de eso usamos el método de velocidadKmh y ponemos dentro sumaEtapas y el sumatorio de tiempoEquipos para obtener la velocidad media del equipo.
 			velocidadE[index] = Math.round((velocidadKmh(sumaEtapas, Arrays.stream(tiempoEquipos).sum())) * 100.0) / 100.0;
 			
 			index++;
 		}
+
+		// Aquí devolvemos el valor de velocidadE
 		return velocidadE;
 	}
 	
-	public static int[] calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<String[]> equipos, ArrayList<double[]> tiempos) {
+	
+	public static int[] calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
 	    int[] corredorRapido = new int[etapas.length];
 	    
 	    for(int i = 0; i < etapas.length; i++) {
