@@ -6,7 +6,6 @@ date: 2023-11-05
 tags:
   - Programacion
 ---
-
 ## Escarabajos binarios
 
 ## Datos
