@@ -130,11 +130,14 @@ public class carrera {
 		sc.close();
 	}
 	
+	//metodo para meter los datos de la carrera de cada equipo
 	public static void rellenarDatos(ArrayList<String[]> equipos, ArrayList<double[]> tiempos, Scanner sc) {
-		Boolean comprobar = true;
-		int numeroEquipos = 0;
-        System.out.println("Introduce numero de equipos: ");
+		Boolean comprobar = true;	//Creamos una variable para control de errores
+		int numeroEquipos = 0; //Creamos una variable para saber el numero de equipos por teclado
+        
+		//creamos un while para volver a preguntar que en caso de que el usuario introduce un valor incorrecto
         while(comprobar) {
+        	System.out.println("Introduce numero de equipos: ");
         	if(sc.hasNextInt()) {
         		numeroEquipos = sc.nextInt();
         		comprobar = false;
@@ -144,22 +147,28 @@ public class carrera {
         	}
         }
         sc.nextLine();
+        
+        //creamos un for para que haya un bucle y podamos poner el nombre de los equipos
         for (int i = 0; i < numeroEquipos ; i++) {
-        	String[] equipo = new String[3]; 
-            double[] tiempoEquipos= new double[4];
+        	String[] equipo = new String[3]; //creamos un array para guardar el nombre del equipo y los dos participantes
+            double[] tiempoEquipos= new double[4];	//creamos un array para guardar los 4 tiempos del equipo
             System.out.println("Introduce el nombre del equipo " + (i+1)+":");
             equipo[0] = sc.nextLine();
+            
+            //creamos un for para hacer un bucle para poner los dos corredores de los equipos
             for (int f = 1; f <= 2; f++) {
                 System.out.println("Introduce el nombre del participante "+f+" del equipo " + (i+1)+":");
                 equipo[f] = sc.nextLine();
 
             }
-            equipos.add(equipo);
+            equipos.add(equipo);	//guardamos en el ArrayList los equipos del array equipo
 
         for (int j = 0; j < tiempoEquipos.length; j++) {
-        	comprobar = true;
-                System.out.println("Tiempo de etapa "+ (j+1) + " del equipo " + (i+1)+":");
+        	comprobar = true;	//volver a utilizar el variable para control de errores
+                
+                //creamos un while para que de un texto de error si no es un numero y volver a preguntarlo
                 while(comprobar) {
+                	System.out.println("Tiempo de etapa "+ (j+1) + " del equipo " + (i+1)+":");
                 	if(sc.hasNextDouble()) {
                 		tiempoEquipos[j] = sc.nextDouble();
                 		comprobar = false;
@@ -170,45 +179,61 @@ public class carrera {
                 	}
                 }
             }
-            tiempos.add(tiempoEquipos);
+            tiempos.add(tiempoEquipos);	//guardamos en el ArrayList los tiempos del array tiempoequipos
 
         }
     }
+	
+	//metodo para hacer la media de los equipos
 	public static double[] calcularMediaTiempo(ArrayList<double[]> tiempos) {
         
-        int index = 0;
-        double[] mediaEquipo = new double[tiempos.size()];
+        int index = 0;	//creamos una variable para llevar un seguimiento del indice actual
+        double[] mediaEquipo = new double[tiempos.size()];	//creamos un array para almacenar la media de los equipos
+        
+        //usamos un forEach para que recorra toda la variable tiempos
         for (double[] i : tiempos) {
-        	double media = 0;
+        	double media = 0;	//variable para guardar la suma de los valores
+        	
+        	//forEach para recorrer todo los tiempos de cada i
             for (double f : i) {
-                media += f ;
+                media += f ;	//se suma los valores y se acumula la suma en media
             }
-        mediaEquipo[index] = media/i.length;
+        mediaEquipo[index] = media/i.length;	//se calcula la media
             index++;
         }
-        return mediaEquipo;
+        return mediaEquipo;	//devuelve las medias de cada equipo
 
 	}
 	
+	//creamos un metodo array int para que guarde las posiciones del metodo CalcularMediaTiempo ordenadas
 	public static int[] calcularClasificacion(ArrayList<String[]> equipos, ArrayList<double[]> tiempos) {
+		
+		//creamos la variable
         double[] mediaEquipos = calcularMediaTiempo(tiempos);
+        
+        //creamos la variable ordenada y lo ordenamos
         double[] mediaOrdenadas = calcularMediaTiempo(tiempos);
         Arrays.sort(mediaOrdenadas);
+        
+        //creamos un int[] para guardar la posicion del equipo
         int[] clasificacion = new int[mediaOrdenadas.length];
+        
+        //creamos un for para que recorra mediaordenadas
         for (int i=0; i<mediaOrdenadas.length;i++) {
-
+        	
+        	//creamos un for para que compare el valor de mediaordenadas con mediaequipos si el valor es igual guarda la posicion
             for (int j = 0; j < mediaEquipos.length; j++) {
+            	
+            	//comparar la posicion del array ordenado con la posicion del array sin ordenar para poder sacarlo
                 if (mediaOrdenadas[i] == mediaEquipos[j]) {
                     clasificacion[i] = j;
                 }
             }
         }
-        return clasificacion;
-
-        //bucle for para comparar cada posicion del array ordenado con el desordenado para sacar la posicion del valor exacto
-        //comparar la posicion del array ordenado con la posicion del array sin ordenar para poder sacarlo
+        return clasificacion; //devuelve un int[] que contiene las posiciones de cada equipo
     }
 	
+	//metodo para calcular la velocidad en km/h
 	public static double velocidadKmh(double km, double h) {
 		return km / h;
 	}
