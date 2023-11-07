@@ -4,7 +4,7 @@ description: Documentacion sobre la practica de Java competitiva. Aqui se explic
 layout: "../../layouts/BlogLayout.astro"
 date: 2023-11-05
 tags:
-  - Programacion
+  - Programación
 ---
 
 ## Escarabajos binarios
