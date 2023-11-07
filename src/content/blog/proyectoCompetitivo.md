@@ -140,7 +140,13 @@ public class carrera {
         	System.out.println("Introduce numero de equipos: ");
         	if(sc.hasNextInt()) {
         		numeroEquipos = sc.nextInt();
-        		comprobar = false;
+        		
+        		//un if para que la entrada de numero tiene que ser al menos 1
+        		if(numeroEquipos > 0) {
+        			comprobar = false;
+        		} else {
+            		System.out.println("Cantidad de equipos hay que tener al menos 1");
+            	}
         	} else {
         		System.out.println("El valor introducido no es correcto. Intentalo de nuevo");
         		sc.next();
