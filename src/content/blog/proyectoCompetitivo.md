@@ -52,25 +52,25 @@ Este Array tiene 4 posiciones, las cuales hacen referencia al tiempo que ha tard
 
 ## Metodos
 
-1. **Desarrollador (Wang)** 1: Puede trabajar en la definición de las variables de clase y el
+1. **Desarrollador 1 (Wang):** Puede trabajar en la definición de las variables de clase y el
 método main . Este desarrollador también será responsable de coordinar el trabajo
 de los demás desarrolladores, ya que estos componentes del código interactúan
 directamente con todas las demás partes.
 
-2. **Desarrollador (Rubén)** 2: Puede trabajar en los métodos rellenarDatos y calcularMediaTiempo.
+2. **Desarrollador 2 (Rubén):** Puede trabajar en los métodos rellenarDatos y calcularMediaTiempo.
 Estos métodos se encargan de inicializar los datos de la carrera y calcular los
 tiempos medios, respectivamente.
 
-3. **Desarrollador (Juan)** 3: Puede trabajar en los métodos clasificacion.
+3. **Desarrollador 3 (Juan):** Puede trabajar en los métodos clasificacion.
 El método clasificacion requiere que el método calcularMediaTiempo esté completo,
 por lo que este desarrollador necesitará trabajar en estrecha colaboración con el
 Desarrollador 2.
 
-4. **Desarrollador (Álex)** 4: Puede trabajar en el método velocidadKmh y velocidadMediaEquipos. Este método
+4. **Desarrollador 4 (Álex):** Puede trabajar en el método velocidadKmh y velocidadMediaEquipos. Este método
 depende del método velocidadKmh y por lo tanto necesitara terminar primero con el método
 velocidadKmh.
 
-5. **Desarrollador (Javi)** 5: Puede trabajar en el método corredorMasRapidoPorEtapa. Este
+5. **Desarrollador 5 (Javi):** Puede trabajar en el método corredorMasRapidoPorEtapa. Este
 método es bastante independiente de los demás, pero este desarrollador
 necesitará comunicarse con el Desarrollador 1 para asegurarse de que su código
 funciona correctamente con el método main 
