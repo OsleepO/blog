@@ -4,15 +4,16 @@ description: Documentacion sobre la practica de Java competitiva. Aqui se explic
 layout: "../../layouts/BlogLayout.astro"
 date: 2023-11-05
 tags:
-  - Programación
+  - Programacion
 ---
+
 ## Escarabajos binarios
 
 ## Datos
 
-El programa trabajara sobre tres datos principales.
+El programa trabajará sobre tres datos principales.
 
-El primer dato principal seran las etapas. Son 4 etapas por lo que guardamos los kilometros en un Array de 4 posiciones, una por etapa.
+El primer dato principal serán las etapas. Son 4 etapas por lo que guardamos los kilometros en un Array de 4 posiciones, una por etapa.
 
 ```java
 double[] = { 74.12, 63.89, 67.37, 84.03 };
@@ -33,7 +34,7 @@ equipos.add(equipo);
 
 Basicamente, lo que contiene cada String[] es un equipo que se guarda en el ArrayList equipos.
 
-Ahora para guardar el tiempo de cada equipo en una etapa, utilizaremos el tercer dato principal, que sera este:
+Ahora para guardar el tiempo de cada equipo en una etapa, utilizaremos el tercer dato principal, que será este:
 
 ```java
 // ArrayList donde se guardan todos los tiempos de cada etapa de los equipos
@@ -49,30 +50,29 @@ tiempos.add(tiempo);
 
 Este Array tiene 4 posiciones, las cuales hacen referencia al tiempo que ha tardado cada equipo en una etapa.
 
-## Metodos
+## Métodos
 
-1. **Desarrollador 1 (Wang):** Puede trabajar en la definicion de las variables de clase y el
-metodo main . Este desarrollador tambien sera responsable de coordinar el trabajo
-de los demas desarrolladores, ya que estos componentes del codigo interactuan
-directamente con todas las demas partes.
+1. **Desarrollador 1 (Wang):** Puede trabajar en la definición de las variables de clase y el método main. 
+Este desarrollador también será responsable de coordinar el trabajo de los demás desarrolladores, ya 
+que estos componentes del código interactúan directamente con todas las demás partes.
 
-2. **Desarrollador 2 (Ruben):** Puede trabajar en los metodos rellenarDatos y calcularMediaTiempo.
-Estos metodos se encargan de inicializar los datos de la carrera y calcular los
-tiempos medios, respectivamente.
+2. **Desarrollador 2 (Ruben):** Puede trabajar en los métodos rellenarDatos y calcularMediaTiempo. Estos 
+métodos se encargan de inicializar los datos de la carrera y calcular los tiempos medios, 
+respectivamente.
 
-3. **Desarrollador 3 (Juan):** Puede trabajar en los metodos clasificacion.
-El metodo clasificacion requiere que el metodo calcularMediaTiempo este completo,
-por lo que este desarrollador necesitara trabajar en estrecha colaboracion con el
+3. **Desarrollador 3 (Juan):** Puede trabajar en los métodos clasificacion. 
+El método clasificacion requiere que el método calcularMediaTiempo esté completo, 
+por lo que este desarrollador necesitará trabajar en estrecha colaboración con el 
 Desarrollador 2.
 
-4. **Desarrollador 4 (alex):** Puede trabajar en el metodo velocidadKmh y velocidadMediaEquipos. Este metodo
-depende del metodo velocidadKmh y por lo tanto necesitara terminar primero con el metodo
-velocidadKmh.
+4. **Desarrollador 4 (Alex):** Puede trabajar en el método velocidadKmh y velocidadMediaEquipos. 
+Este método depende del método velocidadKmh y por lo tanto necesitara terminar primero con 
+el método velocidadKmh.
 
-5. **Desarrollador 5 (Javi):** Puede trabajar en el metodo corredorMasRapidoPorEtapa. Este
-metodo es bastante independiente de los demas, pero este desarrollador
-necesitara comunicarse con el Desarrollador 1 para asegurarse de que su codigo
-funciona correctamente con el metodo main 
+5. **Desarrollador 5 (Javi):** Puede trabajar en el método corredorMasRapidoPorEtapa. Este 
+método es bastante independiente de los demás, pero este desarrollador 
+necesitará comunicarse con el Desarrollador 1 para asegurarse de que su código 
+funciona correctamente con el método main.
 
 ## Codigos
 
