@@ -224,7 +224,7 @@ public class carrera {
 		for (double[] tiempoEquipos : tiempos) {
 
 			// velocidadE guardamos dentro del array es la velocidad media de cada equipo, 
-			/* lo igualamos a la función Math. round() que retorna el valor de un número redondeado 
+			/* Lo igualamos a la función Math. round() que retorna el valor de un número redondeado 
 			 * con 2 decimales multiplicando por 100.0 y dividiendo por 100.0 y dentro de eso usamos
 			 * el método de velocidadKmh y ponemos dentro sumaEtapas y el sumatorio de tiempoEquipos
 			 * para obtener la velocidad media del equipo.
