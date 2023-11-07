@@ -105,7 +105,9 @@ public class carrera {
 		rellenarDatos(equipos, tiempos, sc);
 		
 		// Usamos un operador ternario para en caso de que tenga menos de 3 equipos funciona bien el programa
-		// mas info: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+		/* lo que hace es ver la longitud del calcularClasificacion y si es menor que 3 usa su propia longitud
+		 * y si es mayor que 3, lo limita a 3.
+		 */
 		int condicion = calcularClasificacion(equipos, tiempos).length < 3 ? calcularClasificacion(equipos, tiempos).length : 3;
         // Los 3 primeros, para cada equipo, imprimir su posicion, su nombre y su velocidad media
 		for (int i = 0; i < condicion; i++) {
