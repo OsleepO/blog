@@ -5,7 +5,7 @@ const { frontmatter } = Astro.props;
 <main class="lg:w-1/2 w-full p-4">
   <header class="flex flex-col">
     <h1
-      class="w-full mt-12 text-light-title dark:text-violet-200 font-bold text-4xl text-center p-4"
+      class="w-full mt-12 text-light-title text-violet-200 font-bold text-4xl text-center p-4"
     >
       {frontmatter.title}
     </h1>
@@ -18,7 +18,7 @@ const { frontmatter } = Astro.props;
       </ul>
     </div>
   </header>
-  <article class="mt-8 dark:prose-invert prose prose-lg max-w-none mb-8">
+  <article class="mt-8 prose-invert prose prose-lg max-w-none mb-8">
     <slot />
   </article>
 </main>
