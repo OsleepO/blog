@@ -15,9 +15,9 @@ En la segunda parte de esta práctica es hacer modificaciones para adaptar nuevo
 
 Modificación: El cliente solicita que este año, se va a ampliar la carrera a bicis eléctricas, en ese caso los 2 componentes de cada equipo tienen que realizar las 4 etapas. 
 
-##Modificación
+## Modificación
 
-###Cambio 1
+### Cambio 1
 Antes:
 ```java
 // Calcular el corredor mas rapido para cada etapa
@@ -49,7 +49,7 @@ int index = 0;
 		}
 ```
 
-###Cambio 2
+### Cambio 2
 
 Antes:
 ```java
@@ -203,7 +203,75 @@ public static void rellenarDatos(ArrayList<String[]> equipos, ArrayList<double[]
 	}
 ```
 
-###Cambio 3
+### Cambio 3
+Antes:
+```java
+public static double[] velocidadMediaEquipos(ArrayList<double[]>tiempos, double[]etapas) {
+		double[] velocidadE = new double[tiempos.size()];
+		int index = 0;
+
+		//Este double es para que se sumen todas las etapas con Arrays.stream().sum() y las ponga en una variable que la hemos llamado sumaEtapas
+		double sumaEtapas = Arrays.stream(etapas).sum();
+
+		// Este forEach es para recorrer todo el ArrayList y poder calcular la velocidad media de cada uno de los equipos
+		for (double[] tiempoEquipos : tiempos) {
+
+			// velocidadE guardamos dentro del array es la velocidad media de cada equipo, 
+			/* Lo igualamos a la funcion Math. round() que retorna el valor de un numero redondeado 
+			 * con 2 decimales multiplicando por 100.0 y dividiendo por 100.0 y dentro de eso usamos
+			 * el metodo de velocidadKmh y ponemos dentro sumaEtapas y el sumatorio de tiempoEquipos
+			 * para obtener la velocidad media del equipo.
+			*/
+			velocidadE[index] = Math.round((velocidadKmh(sumaEtapas, Arrays.stream(tiempoEquipos).sum())) * 100.0) / 100.0;
+			
+			index++;
+		}
+
+		// Aqui devolvemos el valor de velocidadE
+		return velocidadE;
+	}
+```
+
+Ahora:
+```java
+public static double[] velocidadMediaEquipos(ArrayList<double[]> tiempos, double[] etapas) {
+		// velocidadE guardamos dentro del array es la velocidad media de cada equipo,
+		double[] velocidadE = new double[tiempos.size()];
+		int index = 0;
+
+		// Este double es para que se sumen todas las etapas con Arrays.stream().sum() y
+		// las ponga en una variable que la hemos llamado sumaEtapas
+		double sumaEtapas = Arrays.stream(etapas).sum();
+
+		// Este forEach es para recorrer todo el ArrayList y poder calcular la velocidad
+		// media de cada uno de los equipos
+		for (double[] tiempoEquipos : tiempos) {
+			int numeroEtapas = tiempoEquipos.length / etapas.length;
+
+			
+			/*
+			 * Lo igualamos a la funcion Math. round() que retorna el valor de un numero
+			 * redondeado
+			 * 
+			 * con 2 decimales multiplicando por 100.0 y dividiendo por 100.0 y dentro de
+			 * eso usamos
+			 * 
+			 * el metodo de velocidadKmh y ponemos dentro sumaEtapas y el sumatorio de
+			 * tiempoEquipos
+			 * 
+			 * para obtener la velocidad media del equipo.
+			 * 
+			 */
+			velocidadE[index] = Math.round(
+					(velocidadKmh((sumaEtapas * numeroEtapas), Arrays.stream(tiempoEquipos).sum())) * 100.0) / 100.0;
+			index++;
+		}
+		// Aqui devolvemos el valor de velocidadE
+		return velocidadE;
+	}
+```
+
+### Cambio 4
 
 Antes:
 ```java
