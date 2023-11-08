@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
@@ -10,7 +10,11 @@ const allBlogPosts = await getCollection("blog");
 	<main>
 		<h1 class="font-extrabold text-6xl p-6 text-center">BLOGS</h1>
 		<div class="lg:w-[800px] flex flex-col gap-4 w-full p-4">
-			{allBlogPosts.map(({ data, slug }) => <Card slug={slug} {...data} />)}
+			{
+				allBlogPosts.map(({ data, slug }) => (
+					<Card slug={slug} {...data} />
+				))
+			}
 		</div>
 	</main>
 </Layout>
