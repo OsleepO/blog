@@ -311,42 +311,57 @@ Antes:
 
 Ahora:
 ```java
-public static ArrayList<double[]> calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
+// Metodo para saber el corredor mas rapido de cada etapa
+	public static ArrayList<double[]> calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
+		//ArrayList donde estan guardados los corredores mas rapido de cada etapa
 		ArrayList<double[]> corredoresRapidos = new ArrayList<>();
 		
 		
 		for(int i = 0; i < etapas.length; i++) {
-			double indexEquipo = 0;
-			double indexCorredor = 0;
+			/*
+			 * Datos guardado son los siguientes:
+			 * Posicion 0 : indexEquipo
+			 * Posicion 1 : indexCorredor
+			 * Posicion 2 : tiempo
+			 */
 			double[] corredorRapido = new double[3];
-			double tiempoRapido = Double.MAX_VALUE;
+			double tiempoRapido = Double.MAX_VALUE;	// dar un valor para empezar
+			
+			//for que recorre todo el ArrayList para comparar
 			for(int j = 0; j < tiempos.size(); j++) {
+				
+				//Una condicion para ver si el tiempo es del bicicletas de montaña
 				boolean condicion = tiempos.get(j).length == etapas.length ? true : false;
+				
+				//depende de la condicion comprueba de una manera u otra
 				if(condicion) {
+					
+					//si tiempo actual es menor que tiempoRapido lo guarda
 					if(tiempos.get(j)[i] < tiempoRapido) {
 						tiempoRapido = tiempos.get(j)[i];
-						indexEquipo = j;
-						indexCorredor = ((i % 2) + 1);
+						corredorRapido[0] = j;	//guardar indexEquipo
+						corredorRapido[1] = ((i % 2) + 1); //guarda indexCorredor
 					}
 				} else {
+					//miramos el que tenga el menor tiempo es el primer o segundo corredor del equipo con bicicletas electricas
 					int posicionTiempoElectrico = tiempos.get(j)[i] < tiempos.get(j)[i + etapas.length] ? i : i + 4;
+					
+					//si tiempo actual es menor que tiempoRapido lo guarda
 					if(tiempos.get(j)[posicionTiempoElectrico] < tiempoRapido) {
 						tiempoRapido = tiempos.get(j)[posicionTiempoElectrico];
-						indexEquipo = j;
-						indexCorredor = posicionTiempoElectrico < etapas.length ? 1 : 2;
+						corredorRapido[0] = j;	//guardar indexEquipo
+						corredorRapido[1] = posicionTiempoElectrico < etapas.length ? 1 : 2; //guarda indexCorredor
 					}
 				}
 			}
-			corredorRapido[0] = indexEquipo;
-			corredorRapido[1] = indexCorredor;
-			corredorRapido[2] = tiempoRapido;
-			corredoresRapidos.add(corredorRapido);
+			corredorRapido[2] = tiempoRapido;	//guardar el tiempoRapido
+			corredoresRapidos.add(corredorRapido);	//guardar los datos anteriores
 		}
 		return corredoresRapidos;
 	}
 ```
 
-##Codigo
+## Codigo
 ```java
 package package_escarabajosbinarios;
 
@@ -674,38 +689,51 @@ public class EscarabajosBinarios2 {
 
 	}
 
-	// Metodo para almacenar en un array los corredores mas rapidos de cada etapa
-
+	// Metodo para saber el corredor mas rapido de cada etapa
 	public static ArrayList<double[]> calcularCorredorMasRapidoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
+		//ArrayList donde estan guardados los corredores mas rapido de cada etapa
 		ArrayList<double[]> corredoresRapidos = new ArrayList<>();
 		
 		
 		for(int i = 0; i < etapas.length; i++) {
-			double indexEquipo = 0;
-			double indexCorredor = 0;
+			/*
+			 * Datos guardado son los siguientes:
+			 * Posicion 0 : indexEquipo
+			 * Posicion 1 : indexCorredor
+			 * Posicion 2 : tiempo
+			 */
 			double[] corredorRapido = new double[3];
-			double tiempoRapido = Double.MAX_VALUE;
+			double tiempoRapido = Double.MAX_VALUE;	// dar un valor para empezar
+			
+			//for que recorre todo el ArrayList para comparar
 			for(int j = 0; j < tiempos.size(); j++) {
+				
+				//Una condicion para ver si el tiempo es del bicicletas de montaña
 				boolean condicion = tiempos.get(j).length == etapas.length ? true : false;
+				
+				//depende de la condicion comprueba de una manera u otra
 				if(condicion) {
+					
+					//si tiempo actual es menor que tiempoRapido lo guarda
 					if(tiempos.get(j)[i] < tiempoRapido) {
 						tiempoRapido = tiempos.get(j)[i];
-						indexEquipo = j;
-						indexCorredor = ((i % 2) + 1);
+						corredorRapido[0] = j;	//guardar indexEquipo
+						corredorRapido[1] = ((i % 2) + 1); //guarda indexCorredor
 					}
 				} else {
+					//miramos el que tenga el menor tiempo es el primer o segundo corredor del equipo con bicicletas electricas
 					int posicionTiempoElectrico = tiempos.get(j)[i] < tiempos.get(j)[i + etapas.length] ? i : i + 4;
+					
+					//si tiempo actual es menor que tiempoRapido lo guarda
 					if(tiempos.get(j)[posicionTiempoElectrico] < tiempoRapido) {
 						tiempoRapido = tiempos.get(j)[posicionTiempoElectrico];
-						indexEquipo = j;
-						indexCorredor = posicionTiempoElectrico < etapas.length ? 1 : 2;
+						corredorRapido[0] = j;	//guardar indexEquipo
+						corredorRapido[1] = posicionTiempoElectrico < etapas.length ? 1 : 2; //guarda indexCorredor
 					}
 				}
 			}
-			corredorRapido[0] = indexEquipo;
-			corredorRapido[1] = indexCorredor;
-			corredorRapido[2] = tiempoRapido;
-			corredoresRapidos.add(corredorRapido);
+			corredorRapido[2] = tiempoRapido;	//guardar el tiempoRapido
+			corredoresRapidos.add(corredorRapido);	//guardar los datos anteriores
 		}
 		return corredoresRapidos;
 	}
