@@ -14,6 +14,12 @@ En la tercera parte de la practica necesitamos una funcionalidad nueva, que es e
 ## Codigos
 
 ```java
+package package_escarabajosbinarios;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Escarabajosbinarios {
 
 	public static void main(String[] args) {
@@ -35,20 +41,27 @@ public class Escarabajosbinarios {
 						+ "-El corredor mas rapido de la 1ª, 2ª, 3ª y 4ª etapa y su velocidad media.\r\n");
 
 		// Llenar las listas con los datos de entrada del usuario
-
 		rellenarDatos(equipos, tiempos, sc);
 
-		ArrayList<double[]> corredoresLentos = calcularCorredorMasLentoEtapa(etapas, tiempos);
-		eliminarEquiposCorredorRepetido(corredoresLentos, equipos, tiempos);
-
+		ArrayList<Integer> equiposEliminados = eliminarEquipos(etapas, tiempos);
+		if(equiposEliminados.size() == 2) {
+			if(equiposEliminados.get(0) == equiposEliminados.get(1)) {
+				equiposEliminados.remove(1);
+			}
+		}
+		for(int i = 0; i < equiposEliminados.size(); i++) {
+			System.out.println("Equipo "+equipos.get(equiposEliminados.get(i))[0]+" eliminado");
+		}
+		
+		for(int i = equiposEliminados.size() - 1; i >= 0; i--) {
+		    equipos.remove(equiposEliminados.get(i).intValue());
+		    tiempos.remove(equiposEliminados.get(i).intValue());
+		}
 		// Usamos un operador ternario para en caso de que tenga menos de 3 equipos
 		// funciona bien el programa
 		/*
 		 * lo que hace es ver la longitud del calcularClasificacion y si es menor que 3
-		 * usa su propia longitud
-		 * 
-		 * y si es mayor que 3, lo limita a 3.
-		 * 
+		 * usa su propia longitud y si es mayor que 3, lo limita a 3.
 		 */
 		int condicion = calcularClasificacion(equipos, tiempos).length < 3
 				? calcularClasificacion(equipos, tiempos).length
@@ -87,36 +100,36 @@ public class Escarabajosbinarios {
 	public static void rellenarDatos(ArrayList<String[]> equipos, ArrayList<double[]> tiempos, Scanner sc) {
 
 		equipos.add(new String[] { "Gustavo Runners", "Marta Diaz", "Peter" });
-		tiempos.add(new double[] { 3, 4, 4, 3 });
+        tiempos.add(new double[] { 1.50, 1.30, 4.50, 6.30 });
 
-		equipos.add(new String[] { "Luisa Speedsters", "Carlos Perez", "Anna" });
-		tiempos.add(new double[] { 60, 5.10, 60, 7.00 });
+        equipos.add(new String[] { "Luisa Speedsters", "Carlos Perez", "Anna" });
+        tiempos.add(new double[] { 6.20, 5.10, 4.90, 7.00 });
 
-		equipos.add(new String[] { "Juan Sprinters", "Elena Rodriguez", "Carlos" });
-		tiempos.add(new double[] { 5.80, 4.70, 4.60, 6.50 });
+        equipos.add(new String[] { "Juan Sprinters", "Elena Rodriguez", "Carlos" });
+        tiempos.add(new double[] { 5.80, 4.70, 4.60, 1.50 });
 
-		equipos.add(new String[] { "Laura Racers", "David Gomez", "Emma" });
-		tiempos.add(new double[] { 5.90, 4.60, 4.70, 6.70 });
+        equipos.add(new String[] { "Laura Racers", "David Gomez", "Emma" });
+        tiempos.add(new double[] { 1.90, 4.60, 4.70, 6.70 });
 
-		equipos.add(new String[] { "Roberto Blazers", "Sara Gonzalez", "Michael" });
-		tiempos.add(new double[] { 5.70, 4.40, 4.80, 6.90 });
+        equipos.add(new String[] { "Roberto Blazers", "Sara Gonzalez", "Michael" });
+        tiempos.add(new double[] { 5.70, 4.40, 4.80, 6.90 });
 
-		equipos.add(new String[] { "Diego Sprinters", "Olivia Smith", "Lucas" });
-		tiempos.add(new double[] { 6.00, 4.50, 4.60, 6.80 });
+        equipos.add(new String[] { "Diego Sprinters", "Olivia Smith", "Lucas" });
+        tiempos.add(new double[] { 6.00, 4.50, 4.60, 6.80 });
 
-		equipos.add(new String[] { "Maria Rushers", "Juan Martinez", "Sophia" });
-		tiempos.add(new double[] { 5.60, 4.80, 4.90, 6.60 });
+        equipos.add(new String[] { "Maria Rushers", "Juan Martinez", "Sophia" });
+        tiempos.add(new double[] { 5.60, 4.80, 4.90, 6.60 });
 
-		// Equipo con bici electrica
-		equipos.add(new String[] { "Daniel Racers", "Paula Ruiz", "Liam" });
-		tiempos.add(new double[] { 6, 60, 4, 60, 2.6, 3, 2, 2 });
+        // Equipo con bici electrica
+        equipos.add(new String[] { "Daniel Racers", "Paula Ruiz", "Liam" });
+        tiempos.add(new double[] { 1.0, 40.90, 40.60, 6.40, 2.00, 4.50, 4.60, 6.80 });
 
-		equipos.add(new String[] { "Natalia Blazers", "Hector Sanchez", "Isabella" });
-		tiempos.add(new double[] { 5.80, 1.10, 1.30, 6.30 });
+        equipos.add(new String[] { "Natalia Blazers", "Hector Sanchez", "Isabella" });
+        tiempos.add(new double[] { 5.80, 1.10, 1.30, 6.30 });
 
-		// Equipo con bici electrica
-		equipos.add(new String[] { "Pablo Speedsters", "Eva Hernandez", "Noah" });
-		tiempos.add(new double[] { 4.10, 5.00, 4.00, 6.20, 3.50, 1.30, 1.50, 1.0 });
+        // Equipo con bici electrica
+        equipos.add(new String[] { "Pablo Speedsters", "Eva Hernandez", "Noah" });
+        tiempos.add(new double[] { 40.10, 5.00, 4.00, 60.20, 3.50, 1.30, 1.50, 1.0 });
 
 //		Boolean comprobar = true; // Creamos una variable para control de errores
 //		int numeroEquipos = 0; // Creamos una variable para saber el numero de equipos por teclado
@@ -355,8 +368,7 @@ public class Escarabajosbinarios {
 			double tiempoRapido = Double.MAX_VALUE; // Iniciamos el tiempoRapido como el mayor posible
 			for (int j = 0; j < tiempos.size(); j++) { // For que recorre la lista de tiempos de todos los equipos
 
-				/*
-				 * verifica si el equipo actual tiene la misma cantidad de tiempos que etapas.
+				/* verifica si el equipo actual tiene la misma cantidad de tiempos que etapas.
 				 * Si esta condición es verdadera, significa que el equipo no tiene bicicletas
 				 * eléctricas y solo hay un tiempo por etapa. En caso contrario, el equipo tiene
 				 * bicicletas eléctricas y hay dos tiempos por etapa.
@@ -373,8 +385,7 @@ public class Escarabajosbinarios {
 					}
 				} else { // Si el equipo tiene bicicletas eléctricas (condicion es falsa):
 
-					/*
-					 * Se determina si el tiempo eléctrico (segundo tiempo en bicicletas eléctricas)
+					/* Se determina si el tiempo eléctrico (segundo tiempo en bicicletas eléctricas)
 					 * es más rápido que el tiempo normal en la etapa i. La variable
 					 * posicionTiempoElectrico se establece en el índice del tiempo más rápido (ya
 					 * sea el tiempo normal o eléctrico).
@@ -398,98 +409,80 @@ public class Escarabajosbinarios {
 		}
 		return corredoresRapidos;
 	}
+	
+	// Metodo para almacenar en un array los corredores mas lentos de cada etapa
+		public static ArrayList<int[]> calcularCorredorMasLentoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
+			// Creamos un nuevo array list donde se almacenará la información sobre los
+			// corredores mas lentos de cada etapa.
+			// Cada entrada en esta lista es un array de tres elementos: [equipo, corredor,
+			// tiempo].
+			ArrayList<int[]> corredoresLentos = new ArrayList<>();
 
-	public static ArrayList<double[]> calcularCorredorMasLentoEtapa(double[] etapas, ArrayList<double[]> tiempos) {
-		ArrayList<double[]> corredoresLentos = new ArrayList<>();
+			for (int i = 0; i < etapas.length; i++) { // Bucle for que recorre cada etapa de la carrera
+				int indexEquipo = 0; // Dos indices para guardar el equipo y el corredor más lento
+				int indexCorredor = 0;
+				int[] corredorLento = new int[2]; // Se crea un array donde almacenaremos el informacion sobre el
+															// equipo, el corredor y el tiempo del corredor más lento en la
+															// etapa actual.
+				double tiempoLento = Double.MIN_VALUE; // Iniciamos el tiempoLento como el menor posible
+				for (int j = 0; j < tiempos.size(); j++) { // For que recorre la lista de tiempos de todos los equipos
 
-		for (int i = 0; i < etapas.length; i++) {
-			double indexEquipo = 0;
-			double indexCorredor = 0;
-			double[] corredorLento = new double[3];
-			double tiempoLento = Double.MIN_VALUE;
+					/* verifica si el equipo actual tiene la misma cantidad de tiempos que etapas.
+					 * Si esta condición es verdadera, significa que el equipo no tiene bicicletas
+					 * eléctricas y solo hay un tiempo por etapa. En caso contrario, el equipo tiene
+					 * bicicletas eléctricas y hay dos tiempos por etapa.
+					 */
+					boolean condicion = tiempos.get(j).length == etapas.length ? true : false;
+					if (condicion) { // Si el equipo no tiene bicicletas eléctricas (condicion es verdadera)
+						if (tiempos.get(j)[i] > tiempoLento) { // Se compara el tiempo actual en la etapa i del equipo j
+																// con el tiempoRapido. Si es mas lento, se actualizan
+																// tiempoLento, indexEquipo y indexCorredor con los nuevos
+																// valores.
+							tiempoLento = tiempos.get(j)[i];
+							indexEquipo = j;
+							indexCorredor = ((i % 2) + 1);
+						}
+					} else { // Si el equipo tiene bicicletas eléctricas (condicion es falsa):
 
-			for (int j = 0; j < tiempos.size(); j++) {
-				boolean condicion = tiempos.get(j).length == etapas.length ? true : false;
-
-				if (condicion) {
-					if (tiempos.get(j)[i] > tiempoLento) {
-						tiempoLento = tiempos.get(j)[i];
-						indexEquipo = j;
-						indexCorredor = ((i % 2) + 1);
+						/* Se determina si el tiempo eléctrico (segundo tiempo en bicicletas eléctricas)
+						 * es más lento que el tiempo normal en la etapa i. La variable
+						 * posicionTiempoElectrico se establece en el índice del tiempo más Lento (ya
+						 * sea el tiempo normal o eléctrico).
+						 */
+						int posicionTiempoElectrico = tiempos.get(j)[i] > tiempos.get(j)[i + etapas.length] ? i : i + 4; //
+						if (tiempos.get(j)[posicionTiempoElectrico] > tiempoLento) { // Se comparan los tiempos ya sea de
+																						// bici normal o electrica y se
+																						// actualiza el valor.
+							tiempoLento = tiempos.get(j)[posicionTiempoElectrico];
+							indexEquipo = j;
+							indexCorredor = posicionTiempoElectrico < etapas.length ? 1 : 2;
+						}
 					}
-				} else {
-					int posicionTiempoElectrico = tiempos.get(j)[i] > tiempos.get(j)[i + etapas.length] ? i : i + 4;
-
-					if (tiempos.get(j)[posicionTiempoElectrico] > tiempoLento) {
-						tiempoLento = tiempos.get(j)[posicionTiempoElectrico];
-						indexEquipo = j;
-						indexCorredor = posicionTiempoElectrico < etapas.length ? 1 : 2;
+				}
+				// Se actualiza el array corredorRapido con la información del equipo
+				// y el corredor más lento y el tiempo más rápido en la etapa actual.
+				corredorLento[0] = indexEquipo;
+				corredorLento[1] = indexCorredor;
+				corredoresLentos.add(corredorLento); // Se almacena el array corredorLento en la lista CorredoresLentos.
+			}
+			return corredoresLentos;
+		}
+		
+		//Metodo que devuelve el index del equipo al que vamos a eliminar
+		public static ArrayList<Integer> eliminarEquipos(double[] etapas, ArrayList<double[]> tiempos) {
+			
+			//Cogemos el valor del metodo en la que nos devuelve los corredores mas lentos de cada etapa
+			ArrayList<int[]> corredoresLentos = calcularCorredorMasLentoEtapa(etapas, tiempos);
+			ArrayList<Integer> equiposEliminados = new ArrayList<>();
+			for(int i = 0; i < corredoresLentos.size(); i++) {
+				for(int j = i + 1; j < corredoresLentos.size(); j++) {
+					if(Arrays.equals(corredoresLentos.get(i), corredoresLentos.get(j))) {
+						equiposEliminados.add((int) corredoresLentos.get(i)[0]);
 					}
 				}
 			}
-
-			corredorLento[0] = indexEquipo;
-			corredorLento[1] = indexCorredor;
-			corredorLento[2] = tiempoLento;
-			corredoresLentos.add(corredorLento);
+			return equiposEliminados;
 		}
-
-		return corredoresLentos;
-	}
-
-	public static void eliminarEquiposCorredorRepetido(ArrayList<double[]> corredoresLentos,
-	        ArrayList<String[]> equipos, ArrayList<double[]> tiempos) {
-	    
-	    ArrayList<Integer> equiposAEliminar = new ArrayList<>();
-
-	    for (int i = 0; i < corredoresLentos.size(); i++) {
-	        if (corredoresLentos.get(i).length > 0) {
-	            int indexEquipo = (int) corredoresLentos.get(i)[0];
-
-	            boolean corredorRepetido = false;
-
-	            if (!equiposAEliminar.contains(indexEquipo)) {
-	                if (tiempos.get(indexEquipo).length > corredoresLentos.size()) {
-	                    double tiempoLento = corredoresLentos.get(i)[2];
-	                    int contadorLentos = 0;
-	                    for (int j = 0; j < tiempos.get(indexEquipo).length; j++) {
-	                        if (tiempos.get(indexEquipo)[j] == tiempoLento) {
-	                            contadorLentos++;
-	                        }
-	                    }
-	                    if (contadorLentos >= 2) {
-	                        corredorRepetido = true;
-	                        equiposAEliminar.add(indexEquipo);
-	                        System.out.println("Equipo a eliminar (Bicicleta eléctrica): " + equipos.get(indexEquipo)[0]);
-	                    }
-	                }
-
-	                if (!corredorRepetido) {
-	                    if (tiempos.get(indexEquipo).length == corredoresLentos.size()) {
-	                        double tiempoLento = corredoresLentos.get(i)[2];
-	                        int contadorLentos = 0;
-	                        for (int j = 0; j < tiempos.get(indexEquipo).length; j++) {
-	                            if (tiempos.get(indexEquipo)[j] == tiempoLento) {
-	                                contadorLentos++;
-	                            }
-	                        }
-	                        if (contadorLentos >= 2) {
-	                            corredorRepetido = true;
-	                            equiposAEliminar.add(indexEquipo);
-	                            System.out.println("Equipo a eliminar: " + equipos.get(indexEquipo)[0]);
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    }
-
-	    // Eliminar los equipos de las listas principales
-	    for (int i = equiposAEliminar.size() - 1; i >= 0; i--) {
-	        int indexEquipoEliminar = equiposAEliminar.get(i);
-	        equipos.remove(indexEquipoEliminar);
-	        tiempos.remove(indexEquipoEliminar);
-	    }
-	}
 }
+
 ```
